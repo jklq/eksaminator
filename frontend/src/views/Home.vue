@@ -1,8 +1,15 @@
+<style lang="scss">
+.red {
+  color: rgb(180, 0, 0);
+}
+</style>
+
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="hello" />
-    <BaseButton msg="he" />
+    <h1><span class="red">Eksiminator</span> - Vær klar for eksamen</h1>
+    <!-- <HelloWorld msg="hello" /> -->
+    <BaseButton t="primary">Lag en gratis bruker</BaseButton>
+    <BaseButton t="default">Logg inn</BaseButton>
   </div>
 </template>
 
