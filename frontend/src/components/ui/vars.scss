@@ -1,0 +1,8 @@
+$primaryColor: rgb(180, 0, 0);
+$primaryHoverColor: darken($primaryColor, 5);
+$secondaryColor: rgba(0, 0, 0, 0.068);
+$secondaryHoverColor: darken($secondaryColor, 5);
+
+* {
+    box-sizing: border-box;
+  }
