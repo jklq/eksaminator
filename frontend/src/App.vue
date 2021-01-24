@@ -7,23 +7,14 @@
 </template>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+
+body {
+  font-family: "Inter", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
 }
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.block {
+  display:block;
+}
+#app {
+  color: #2c3e50;
 }
 </style>

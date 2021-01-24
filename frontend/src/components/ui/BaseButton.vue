@@ -1,31 +1,30 @@
 <style lang="scss">
-@use './vars.scss' as vars;
+@use './base.scss' as b;
 
 .btn {
   box-sizing: border-box !important;
   display: inline-block;
   text-decoration: none;
-  padding: 8px 22px;
-  border-radius: 8px;
-  font-size: 1.45em;
+  padding: 8px 16px;
+  border-radius: 7px;
   transition: 100ms;
   cursor: pointer;
-  border-style: solid;
-  border-width: 2px;
 }
 .btn-default {
-  color: #000;
+  padding: 8px 12px;
+  color: b.$primaryColor;
+  text-decoration: underline;
 }
 .btn-default:hover {
-  background-color: vars.$secondaryHoverColor;
+  background-color: b.$secondaryHoverColor;
 }
+
 .btn-primary {
-  border-color:  rgb(165, 0, 0);
-  background-color: vars.$primaryColor;
+  background-color: b.$primaryColor;
   color: #fff;
 }
 .btn-primary:hover {
-  background-color: vars.$primaryHoverColor;
+  background-color: b.$primaryHoverColor;
 }
 </style>
 
