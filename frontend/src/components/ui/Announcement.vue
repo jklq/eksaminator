@@ -1,8 +1,6 @@
 <style lang="scss">
 
 .announcement {
-  max-width: 900px;
-  margin: 0 auto;
   background-color: #a7f0ba;
   text-align: center;
   font-weight: 500;

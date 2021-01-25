@@ -9,3 +9,7 @@ $backgroundColor: lighten($primaryColor, 47);
 * {
     box-sizing: border-box;
 }
+section {
+  max-width: 900px;
+  margin: 0 auto;
+}

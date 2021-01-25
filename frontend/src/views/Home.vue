@@ -13,6 +13,8 @@
   <Announcement t="warning">
     <strong>OBS: </strong> Eksaminator er fortsatt under tidlig utvikling!
   </Announcement>
+  <ImageAndCaptions>
+  </ImageAndCaptions>
   </div>
 </template>
 
@@ -22,6 +24,7 @@ import HelloWorld from '@/components/HelloWorld.vue';// @ is an alias to /src
 import BaseButton from '@/components/ui/BaseButton.vue';
 import BaseHero from '@/components/ui/BaseHero.vue';
 import Announcement from '@/components/ui/Announcement.vue';
+import ImageAndCaptions from '@/components/ui/ImageAndCaptions.vue';
 
 @Options({
   components: {
@@ -29,6 +32,7 @@ import Announcement from '@/components/ui/Announcement.vue';
     BaseButton,
     BaseHero,
     Announcement,
+    ImageAndCaptions,
   },
 })
 export default class Home extends Vue {}

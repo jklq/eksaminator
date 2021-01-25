@@ -11,7 +11,7 @@
   background-image: url("../../assets/robot2.svg");
   background-repeat: no-repeat;
   background-size: 30%;
-  background-position: 85% -100%;
+  background-position: 85% 200%;
 }
 @media (min-width: 30rem) {
   .hero .captions {
@@ -25,7 +25,9 @@
     max-width: 20ch;
   }
   .hero .captions p {
-    max-width: 40ch;
+    max-width: 100%;
+    padding-right: 45%;
+    font-size: 1.3em;
   }
   .hero .captions .btn {
       margin-right: 10px;
