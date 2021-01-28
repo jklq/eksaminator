@@ -36,9 +36,6 @@ import BaseHero from '@/components/ui/BaseHero.vue';
 import BaseAnnouncement from '@/components/ui/BaseAnnouncement.vue';
 import ImageAndCaptions from '@/components/ui/ImageAndCaptions.vue';
 import BaseCTA from '@/components/ui/BaseCTA.vue';
-import AuthService from '../services/AuthService';
-
-const Auth = new AuthService();
 
 @Options({
   components: {
