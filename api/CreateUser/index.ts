@@ -8,7 +8,7 @@ const httpTrigger: AzureFunction = async function (
   let response;
 
   try {
-    const product = req.body;
+    const user = req.body;
     // const result = await usersService.create({userId: 1, username: "jklq", email:"mail@seang.xyz"});
     // response = { body: result, status: 200 };
     response = {body: "hello!", status: 200}
