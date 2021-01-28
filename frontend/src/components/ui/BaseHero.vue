@@ -2,18 +2,21 @@
 @use './base.scss' as b;
 
 .hero {
-  font-size: 1.2em;
+  border-radius: b.$borderRadius b.$borderRadius 0 0;
   max-width: 900px;
   margin: 0 auto;
-  border-radius: 10px 10px 0 0;
   background-color: b.$backgroundColor;
-  padding: 4rem;
-  background-image: url("../../assets/robot2.svg");
   background-repeat: no-repeat;
   background-size: 30%;
   background-position: 85% 200%;
+  font-size: 1.2em;
+  padding: b.$sectionPadding / 2;
 }
 @media (min-width: 30rem) {
+  .hero {
+    padding: b.$sectionPadding;
+    background-image: url("../../assets/robot2.svg");
+  }
   .hero .captions {
     text-align: left;
   }

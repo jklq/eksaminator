@@ -32,7 +32,7 @@ import { Options, Vue } from 'vue-class-component';
     t: String,
   },
 })
-export default class BaseButton extends Vue {
+export default class BaseAnnouncement extends Vue {
   t!: string
 }
 </script>

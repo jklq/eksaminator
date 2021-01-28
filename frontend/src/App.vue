@@ -10,11 +10,15 @@
 
 body {
   font-family: "Inter", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  margin: 0;
 }
 .block {
   display:block;
 }
 #app {
   color: #2c3e50;
+}
+p {
+  font-size: 1.1em;
 }
 </style>
