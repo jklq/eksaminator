@@ -1,8 +1,5 @@
 {
-    "staticWebApps.appSubpath": "/",
-    "staticWebApps.apiSubpath": "api",
-    "staticWebApps.outputSubpath": "dist",
-    "azureFunctions.deploySubpath": ".",
+    "azureFunctions.deploySubpath": "api",
     "azureFunctions.postDeployTask": "npm install",
     "azureFunctions.projectLanguage": "TypeScript",
     "azureFunctions.projectRuntime": "~3",
