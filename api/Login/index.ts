@@ -1,5 +1,5 @@
 import { AzureFunction, Context, HttpRequest } from "@azure/functions"
-import { validateUser } from '../helpers/validateUser'
+import { validateUser } from '../helpers/validationHandler'
 import userService from '../services/usersService'
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
@@ -15,7 +15,7 @@ try {
             body: "Invalid input"
         }
     } else {
-        const result = await userService.generateToken() // TODO: create generateToken function
+        const result = await userService.getAuthToken(queryEmail, queryPassword)
         response = {
             status: 200,
             body: result
