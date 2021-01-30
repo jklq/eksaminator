@@ -12,10 +12,13 @@
   "dependencies": {
     "@azure/cosmos": "^3.9.5",
     "bcrypt": "^5.0.0",
+    "cryptr": "^6.0.2",
+    "jsonwebtoken": "^8.5.1",
     "validator": "^13.5.2"
   },
   "devDependencies": {
     "@azure/functions": "^1.0.2-beta2",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^14.14.22",
     "typescript": "^3.3.3"
   }
