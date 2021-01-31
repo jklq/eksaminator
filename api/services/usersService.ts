@@ -15,11 +15,29 @@ const userService = {
       this.client = new CosmosClient(CONNECTION_STRING);
       this.database = this.client.database("eksaminator");
       this.container = this.database.container("users");
+      this.responses = {
+        success: {
+          status: 200,
+          body: "sucess"
+        },
+        usernameOrEmailTaken: {
+          status: 409,
+          body: "username-or-email-taken"
+        }, 
+        emailOrPasswordWrong: {
+          status: 401,
+          body: "incorrect-email-or-password"
+        },
+        invalidInput: {
+          status: 422,
+          body: "invalid-input"
+        },
+      }
     } catch (err) {
       console.log(err.message);
     }
   },
-  async matchUser(search: {email?, username?} | any , options: {returnResource: boolean} = {returnResource: false}) {
+  async matchUserInDB(search: {email?, username?} | any , options: {returnResource: boolean} = {returnResource: false}) {
     let queryEmailAndUsername = Object.keys(search).length === 1 ? false : true 
     let query
 
@@ -51,22 +69,16 @@ const userService = {
         return options.returnResource ? {matchFound: true, resources: resources} : true
     }
   },
-  async create(user: {username: string, email: string, password: any}) {
-    const isUsernameTaken = await this.matchUser({username: user.username, email: user.email})
+  async createUser(user: {username: string, email: string, password: any}) {
+    const isUsernameTaken = await this.matchUserInDB({username: user.username, email: user.email})
 
     if (!isUsernameTaken) {
       user.password = await hashPass(user.password)
 
       const { resource } = await this.container.items.create(user);
-      return {
-        status: 200,
-        body: "success"
-      };
+      return this.responses.success
     } else {
-      return {
-        status: 200,
-        body: "username-or-email-taken"
-      };
+      return this.responses.usernameOrEmailTaken
     }
   },
   async register(userInput: {username: string, email: string, password: any}) {
@@ -74,58 +86,48 @@ const userService = {
     let response
 
     if (!valid) {
-      return "invalid-input"
+      return this.responses.invalidInput
     } else {
-      const result = await this.userService.create({username: userInput.username, email: userInput.email, password: userInput.password})
+      const result = await this.createUser({username: userInput.username, email: userInput.email, password: userInput.password})
       return result
     }
   },
-  async getAuthToken(inputtedEmail: string, inputtedPassword: string) {
-    const userMatcher = await this.matchUser(inputtedEmail, {emailMode: true, returnResource: true})
+  async getAuthToken(userInput: {email: string, password: string}) {
+    const userMatchResults = await this.matchUserInDB({email: userInput.email}, {returnResource: true})
 
-    if (userMatcher.matchFound) {
-      let userMach = userMatcher.resources[0]
+    if (userMatchResults.matchFound) {
+      let userMatch = userMatchResults.resources[0]
 
       // check hash
-      let hashMatch = comparePass(inputtedPassword, userMach.password)
+      let hashMatch = comparePass(userInput.password, userMatch.password)
 
       // generate token
       if (hashMatch) {
         let payload = {
-         username: userMach.username 
+         username: userMatch.username 
         }
         
         let JWT = await signToken(payload)
-        return JWT
+
+        return { cookies: [{name: "JWT", value: JWT}], body: JWT }
       } else {
-        return {
-          status: 403,
-          body: "Credentials provided are incorrect."
-        }
+        return this.responses.emailOrPasswordWrong
       }
     } else {
-      return {
-        status: 403,
-        body: "Credentials provided are incorrect."
-      }
+      return this.responses.emailOrPasswordWrong
     }
   },
-  async read(): Promise<string> {
-    const iterator = this.container.items.readAll();
-    const { resources } = await iterator.fetchAll();
-    return JSON.stringify(resources);
-  },
-  async update(product) {
-    const { resource } = await this.container.item(
-      product.id,
-      product.brand.name,
-    )
-      .replace(product);
-    return resource;
-  },
-  async delete(id, brandName) {
-    const result = await this.container.item(id, brandName).delete();
-  },
+  async login(userInput: {email: string, password: string}) {
+    const valid = validateUser(userInput.email, userInput.password)    
+    let response
+    
+    if (!valid) {
+      return this.responses.invalidInput 
+    } else {
+      const result = await this.getAuthToken({email: userInput.email, password: userInput.password})
+      return result
+    }
+  }
 };
 
 userService.init();
