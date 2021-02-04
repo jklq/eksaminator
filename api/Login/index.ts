@@ -1,20 +1,14 @@
-import { AzureFunction, Context, HttpRequest } from "@azure/functions"
-import userService from '../services/usersService'
+import * as MiddlewareHandler from 'azure-func-middleware'
+import { validateLogin } from "../helpers/validationHandler";
+import getAuthToken from '../controllers/getAuthToken'
+// const { someFunctionHandler } = require('./handlers');
 
-const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
-let response
-try {
-    const queryEmail = req.query.email || "."
-    const queryPassword = req.query.password || "."
-
-    const result = await userService.login({email: queryEmail, password: queryPassword})
-    response = result
-} catch (err) {
-    response = {
-        status: 500,
-        body: "HTTP Error 500: An unexpected condition was encountered while the server was attempting to fulfil the request."
-    }
-}
-context.res = response
-};
-export default httpTrigger;
+const Login = new MiddlewareHandler()
+    .use(validateLogin)
+    .use(getAuthToken)
+    .catch((err, ctx) => {
+        ctx.done(err)
+    })
+    .listen();
+   
+export default Login;

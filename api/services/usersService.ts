@@ -3,7 +3,7 @@ import { match } from "assert";
 import { sign } from "crypto";
 import { hashPass, comparePass } from '../helpers/hashHandler';
 import { signToken, verifyToken } from '../helpers/tokenHandler'
-import { validateUser, validateUsername} from '../helpers/validationHandler'
+import { validateLogin, validateRegister} from '../helpers/validationHandler'
 
 // Set connection string from CONNECTION_STRING value in local.settings.json
 const CONNECTION_STRING = process.env.CONNECTION_STRING;
@@ -76,24 +76,15 @@ const userService = {
       user.password = await hashPass(user.password)
 
       const { resource } = await this.container.items.create(user);
-      return this.responses.success
+      return {status: "success"}
     } else {
-      return this.responses.usernameOrEmailTaken
-    }
-  },
-  async register(userInput: {username: string, email: string, password: any}) {
-    const valid = validateUser(userInput.email, userInput.password) && validateUsername(userInput.username)
-    let response
-
-    if (!valid) {
-      return this.responses.invalidInput
-    } else {
-      const result = await this.createUser({username: userInput.username, email: userInput.email, password: userInput.password})
-      return result
+      return {status: "conflict", msg: "An account with that username or email already exist"}
     }
   },
   async getAuthToken(userInput: {email: string, password: string}) {
+    console.log(userInput)
     const userMatchResults = await this.matchUserInDB({email: userInput.email}, {returnResource: true})
+    console.log("userMatch " + JSON.stringify(userMatchResults)
 
     if (userMatchResults.matchFound) {
       let userMatch = userMatchResults.resources[0]
@@ -104,30 +95,24 @@ const userService = {
       // generate token
       if (hashMatch) {
         let payload = {
-         username: userMatch.username 
+         username: userMatch.username,
+         secrets: {
+           nice: "nice"
+         }
         }
         
         let JWT = await signToken(payload)
 
-        return { cookies: [{name: "JWT", value: JWT}], body: JWT }
+        return { status: "success", msg: JWT} //TODO: format correctly
       } else {
-        return this.responses.emailOrPasswordWrong
+        console.log("Wrong password")
+        return {status: "forbidden", msg: "Wrong email or password"}
       }
     } else {
-      return this.responses.emailOrPasswordWrong
+      console.log("Wrong email")
+      return {status: "forbidden", msg: "Wrong email or password"}
     }
   },
-  async login(userInput: {email: string, password: string}) {
-    const valid = validateUser(userInput.email, userInput.password)    
-    let response
-    
-    if (!valid) {
-      return this.responses.invalidInput 
-    } else {
-      const result = await this.getAuthToken({email: userInput.email, password: userInput.password})
-      return result
-    }
-  }
 };
 
 userService.init();
