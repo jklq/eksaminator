@@ -2,7 +2,6 @@
 import userService from '../services/usersService'
 
 const handleGetTokenResponse = (ctx, next, response) => {
-    console.log("here i am = " + JSON.stringify(response))
     if (response.status === "success") {
         ctx.res = {
             body: response.msg,

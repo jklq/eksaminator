@@ -84,7 +84,6 @@ const userService = {
   async getAuthToken(userInput: {email: string, password: string}) {
     console.log(userInput)
     const userMatchResults = await this.matchUserInDB({email: userInput.email}, {returnResource: true})
-    console.log("userMatch " + JSON.stringify(userMatchResults)
 
     if (userMatchResults.matchFound) {
       let userMatch = userMatchResults.resources[0]
