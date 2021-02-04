@@ -15,24 +15,6 @@ const userService = {
       this.client = new CosmosClient(CONNECTION_STRING);
       this.database = this.client.database("eksaminator");
       this.container = this.database.container("users");
-      this.responses = {
-        success: {
-          status: 200,
-          body: "sucess"
-        },
-        usernameOrEmailTaken: {
-          status: 409,
-          body: "username-or-email-taken"
-        }, 
-        emailOrPasswordWrong: {
-          status: 401,
-          body: "incorrect-email-or-password"
-        },
-        invalidInput: {
-          status: 422,
-          body: "invalid-input"
-        },
-      }
     } catch (err) {
       console.log(err.message);
     }
