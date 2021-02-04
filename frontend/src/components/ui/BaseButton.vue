@@ -30,14 +30,20 @@
 
 <template>
     <a
+    @click="changeRoute()"
     class="btn"
-    :class="['btn-' + t]"> <slot></slot> </a>
+    :class="['btn-' + t]"> <slot>Button!</slot> </a>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 
 @Options({
+  data() {
+    return {
+
+    };
+  },
   props: {
     t: String,
     value: String,

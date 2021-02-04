@@ -6,7 +6,6 @@
   <BaseHero>
     <h1>Din Personlige <span class="block">Eksamen-hjelper</span></h1>
     <p>Vi kommer med redskapene du trenger for å forbrede deg til matteeksamen! </p>
-    <!-- <HelloWorld msg="hello" /> -->
     <BaseButton t="primary">Lag en gratis bruker</BaseButton>
     <BaseButton t="default">Logg inn</BaseButton>
   </BaseHero>
