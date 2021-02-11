@@ -21,7 +21,7 @@ export const validateLogin = async (ctx, next) => {
     const valid = validator.isEmail(email) &&
         validator.isLength(password, {max: 35}) &&
         validator.isStrongPassword(password, {minSymbols: 0, maxLength: 30})
-
+        
     handleValidBooleon(ctx, next, valid) 
 }
 
@@ -29,6 +29,6 @@ export const validateRegister = (ctx, next) => {
     const username = ctx.req.query.username
     const valid = exports.validateLogin(ctx) && 
         validator.matches(username, '^(?=[a-zA-Z0-9._\-]{3,20}$)(?!.*[-.]{2})[^_.].*[^_.]$', 'i')
-    
+
     handleValidBooleon(ctx, next, valid)
 }

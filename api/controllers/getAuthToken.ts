@@ -23,6 +23,7 @@ const handleGetTokenResponse = (ctx, next, response) => {
 const createUser = async (ctx, next) => {
     const password = ctx.req.query.password
     const email = ctx.req.query.email
+
     
     const response = await userService.getAuthToken({password: password, email: email})
     

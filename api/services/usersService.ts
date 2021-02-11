@@ -64,7 +64,6 @@ const userService = {
     }
   },
   async getAuthToken(userInput: {email: string, password: string}) {
-    console.log(userInput)
     const userMatchResults = await this.matchUserInDB({email: userInput.email}, {returnResource: true})
 
     if (userMatchResults.matchFound) {
@@ -76,14 +75,11 @@ const userService = {
       // generate token
       if (hashMatch) {
         let payload = {
-         username: userMatch.username,
-         secrets: {
-           nice: "nice"
-         }
+          loggedIn: true, 
+          username: userMatch.username,
         }
         
         let JWT = await signToken(payload)
-
         return { status: "success", msg: JWT} //TODO: format correctly
       } else {
         console.log("Wrong password")
