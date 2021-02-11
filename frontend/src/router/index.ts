@@ -17,6 +17,21 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Register.vue'),
+  },
+  {
+    path: '/panel',
+    name: 'Panel',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Panel.vue'),
+  },
+  {
     path: '/404',
     name: '404',
     component: NotFound,

@@ -7,12 +7,11 @@
 </template>
 
 <style lang="scss">
-
 body {
-  font-family: "Inter", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
   margin: 0;
+  font-family: "Inter", "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
 }
-.block {
+.bdock {
   display:block;
 }
 #app {

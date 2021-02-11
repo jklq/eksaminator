@@ -6,7 +6,7 @@
   display: inline-block;
   text-decoration: none;
   padding: 8px 16px;
-  border-radius: 7px;
+  border-radius: b.$secondaryBorderRadius;
   transition: 100ms;
   cursor: pointer;
 }
@@ -19,18 +19,22 @@
   background-color: b.$secondaryHoverColor;
 }
 
-.btn-primary {
+.btn-primary, .btn-submit {
   background-color: b.$primaryColor;
   color: #fff;
 }
-.btn-primary:hover {
+.btn-primary:hover, .btn-submit:hover {
   background-color: b.$primaryHoverColor;
+}
+.btn-submit {
+  text-align: center;
+  padding: 10px 30px;
 }
 </style>
 
 <template>
     <a
-    @click="changeRoute()"
+    @click="changeRoute(href)"
     class="btn"
     :class="['btn-' + t]"> <slot>Button!</slot> </a>
 </template>
@@ -44,13 +48,23 @@ import { Options, Vue } from 'vue-class-component';
 
     };
   },
+  methods: {
+    changeRoute(route) {
+      if (route) {
+        this.$router.push({ path: route });
+      }
+    },
+  },
   props: {
+    href: String,
     t: String,
     value: String,
   },
 })
 export default class BaseButton extends Vue {
   t!: string
+
+  href: string
 
   value!: string
 }

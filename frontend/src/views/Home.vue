@@ -1,13 +1,12 @@
 <template>
   <div class="home">
   <section>
-  <BaseButton t="primary">Logg inn!</BaseButton>
   </section>
   <BaseHero>
     <h1>Din Personlige <span class="block">Eksamen-hjelper</span></h1>
     <p>Vi kommer med redskapene du trenger for å forbrede deg til matteeksamen! </p>
     <BaseButton t="primary">Lag en gratis bruker</BaseButton>
-    <BaseButton t="default">Logg inn</BaseButton>
+    <BaseButton t="default" href="/login">Logg inn</BaseButton>
   </BaseHero>
   <BaseAnnouncement t="warning">
     <strong>OBS: </strong> Eksaminator er fortsatt under tidlig utvikling!
@@ -21,7 +20,9 @@
   </ImageAndCaptions>
   <BaseCTA>
       <h2>Er du klar til å begynne?</h2>
-      <BaseButton t="primary">Lag en ny bruker</BaseButton>
+      <BaseButton t="primary" href="/register">
+          Lag en ny bruker
+      </BaseButton>
       <BaseButton t="default">Les mer</BaseButton>
   </BaseCTA>
   </div>
